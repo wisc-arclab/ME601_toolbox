@@ -8,12 +8,10 @@ addpath('utils')
 
 % ============ Your code goes here ============================
 
-% Select the csv file with your trajectory
-% See trajectory_generator.m
+% Select the csv file with your trajectory (see trajectory_generator.m)
 trajfile = 'traj_fig8_20s.csv';
 
-% controller function handle:
-% Change from @template_controller to @your_controller_filename
+% controller function handle
 controlhandle = @PID_controller;
 
 % ============ Your code ends here ============================
