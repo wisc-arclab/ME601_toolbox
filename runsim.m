@@ -6,17 +6,19 @@
 clear; close all; clc
 addpath('utils')
 
-% You need to implement trajhandle and controlhandle
+% ============ Your code goes here ============================
 
-% trajectory generator function handle:
-% Change from @template_trajectory to @your_trajectory_filename
-trajhandle = @template_trajectory;
+% Select the csv file with your trajectory
+% See trajectory_generator.m
+trajfile = 'traj_fig8_20s.csv';
 
 % controller function handle:
 % Change from @template_controller to @your_controller_filename
 controlhandle = @template_controller;
 
-% *********** YOU SHOULDN'T NEED TO CHANGE ANYTHING BELOW **********
+% ============ Your code ends here ============================
+
+
 % real-time: if set to true, the program will slow execution to 
 % match real time.
 real_time = true;
@@ -27,15 +29,10 @@ view_type = 3; % 2 for 2D, 3 for 3D
 % number of quadrotors
 nquad = 1;
 
-% Load trajectory csv if you have one
-traj_name = functions(trajhandle).function;
-if strcmp(traj_name,'fig8_trajectory')
-    warning(['The trajectory function handle name is used by the example',...
-    ' trajectory. Please use a different trajectroy handle name.']);
-    global M
-    M = readmatrix('traj_fig8_20s.csv'); % load in trajectory matrix
-end
-    
+% Load trajectory csv
+global M
+M = readmatrix(trajfile); % load in trajectory matrix
+trajhandle = @trajectory_readonly;
 % final time
 [~,t_f] = trajhandle(0); % Obtain the domain [0,t_f] of the trajectory
 
