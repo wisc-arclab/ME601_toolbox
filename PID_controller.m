@@ -43,7 +43,7 @@ att(3) = Y.y(4);
 
 %% Torque Controller
 e_att = x(7:9) - att;
-omega_des = [0;0;Y.dy(4)]; % differential flatness for students
+omega_des = [0;0;Y.dy(4)]; % You can use differential flatness to improve this
 e_omega = x(10:12) - omega_des;
 att_ddot_des = - Katt_p*e_att - Katt_d*e_omega;
 M = params.I*att_ddot_des;
