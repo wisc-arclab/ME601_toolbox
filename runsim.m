@@ -14,7 +14,7 @@ trajfile = 'traj_fig8_20s.csv';
 
 % controller function handle:
 % Change from @template_controller to @your_controller_filename
-controlhandle = @template_controller;
+controlhandle = @PID_controller;
 
 % ============ Your code ends here ============================
 
