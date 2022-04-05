@@ -1,4 +1,4 @@
-function [F, M, trpy, drpy] = controller(t, qd, qn, params, student_controller)
+function [F, M, trpy, drpy] = controller_readonly(t, qd, qn, params, student_controller)
 % CONTROLLER quadrotor controller
 % The current states are:
 %% Inputs:
@@ -35,7 +35,6 @@ function [F, M, trpy, drpy] = controller(t, qd, qn, params, student_controller)
 % controls u, and from there F and M
 %
 
-% =================== Your code goes here ===================
 % populate template_controller function with vijay data
 x = [qd{qn}.pos; qd{qn}.vel; qd{qn}.euler; qd{qn}.omega];
 Y.y = [qd{qn}.pos_des; qd{qn}.yaw_des];
@@ -48,7 +47,6 @@ phi_des = xi_des(1);
 theta_des = xi_des(2);
 psi_des = xi_des(3);
 
-% =================== Your code ends here ===================
 
 % Output trpy and drpy as in hardware
 trpy = [F, phi_des, theta_des, psi_des];

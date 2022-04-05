@@ -3,8 +3,7 @@
 %
 % ***************** ME 601 QUADROTOR SIMULATION *****************
 % clear workspace and add required paths
-close all
-clear all
+clear; close all; clc
 addpath('utils')
 
 % You need to implement trajhandle and controlhandle
@@ -103,7 +102,7 @@ for iter = 1:max_iter
         end
 
         % Run simulation
-        UPenn_controller = @controller;
+        UPenn_controller = @controller_readonly;
         [tsave, xsave] = ode45(@(t,s) quadEOM(t, s, qn, UPenn_controller, trajhandle, params, controlhandle), timeint, x{qn});
         x{qn}    = xsave(end, :)';
         
