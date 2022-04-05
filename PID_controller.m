@@ -26,8 +26,8 @@ function [F, M, att] = PID_controller(x,Y,params)
 %% Gains
 Kpos_p = diag([.5 .5 1.5]); % proportional position gain
 Kpos_d = diag([1 1 2]); % derivative position gain
-Katt_p = 5*diag([1 1 .2]); % proportional attitude gain
-Katt_d = diag([2 2 1.2]); % derivative attitude gain
+Katt_p = 5*diag([20 20 .2]); % proportional attitude gain
+Katt_d = diag([20 20 1.2]); % derivative attitude gain
 
 %% Postition Controller
 e_pos = x(1:3) - Y.y(1:3);
