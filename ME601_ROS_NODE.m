@@ -2,7 +2,11 @@
 % This file will be used by the TA to test student controllers
 % and trajectories in the lab session and record experimental
 % data.
+%
 % This file is to be run in arc-desktop-03.me.wisc.edu
+%
+% Note that this node depends on arclab_quadcopters 
+% which is a private ROS Package by ARC Lab.
 
 
 %% Student Code Setup
