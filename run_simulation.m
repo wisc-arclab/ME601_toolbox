@@ -6,15 +6,15 @@
 clear; close all; clc
 addpath('utils')
 
-% ============ Your code goes here ============================
+%% ============ Your code goes here ============================
 
 % Select the csv file with your trajectory (see trajectory_generator.m)
-trajfile = 'traj_fig8_20s.csv';
+trajfile = 'traj_spiral_10s.csv';
 
 % controller function handle
 controlhandle = @PID_controller;
 
-% ============ Your code ends here ============================
+%% ============ Your code ends here ============================
 
 
 % real-time: if set to true, the program will slow execution to 

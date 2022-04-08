@@ -17,31 +17,30 @@
 % V. Freire and X. Xu, “Flatness-based quadcopter trajectory planning
 %   and tracking with continuous-time safety guarantees."
 %%%%
+
 clear; clc; close all
 
-%% User Parameters
-% ====== Your code goes here ======
+%% ====== Your code goes here ======
 
 % If you choose aggressive (short) flight durations, your controller
 % will probably fail. If you choose conservative (long) flight
 % durations, your TA will get bored.
-t_flight = 20 ; % [sec] Flight Duration
+t_flight = 10 ; % [sec] Flight Duration
 
 % Specify the "waypoints" for the trajectory in meters:
 % waypoints = [x0, x1, ...;
 %              y0, y1, ...;
 %              z0, z1, ...]';
 
-% Sample trajectory "Figure 8"
-waypoints = [0, 1, 1, 0,-1,-1, 0;
-             0, 1,-1, 0, 1,-1, 0;
-             0, 1, 1, 1, 1, 1, 0];
+% Sample trajectory "spiral"
+waypoints = [0, 0,  0.5,-0.25,-0.75,  0,  0.5,  -0.5, -0.5;
+             2, 2,  1.5,  1,    0.5,  0, -0.5, -1.25,  -1;
+             0,0.5,0.75, 1.25, 0.75,0.4, 0.75, 0.5, 0];
 
 % Objective order to minimize
 k_r = 4; % Minimize snap (Try k_r = 1 for min-length. Which is better?)
 
-% ====== Your code ends here ======
-%% Other Parameters
+%% ====== Your code ends here ======
 n = 4; % Polynomial order (4 minimum)
 
 % Polynomial parameters
@@ -55,11 +54,12 @@ polys_y = get_polys(waypoints(2,:), m, n, t_bounds, k_r);
 polys_z = get_polys(waypoints(3,:), m, n, t_bounds, k_r);
 
 
-% Plot trajectory
-[x_traj, y_traj, z_traj, t_traj] = draw(polys_x, polys_y, polys_z, waypoints, t_bounds);
-
 % Save as .csv file
 Y = to_csv(t_bounds, polys_x, polys_y, polys_z);
+
+% Plot trajectory
+[x_traj, y_traj, z_traj, t_traj] = draw(polys_x, polys_y, polys_z, waypoints, t_bounds);
+draw_vel(Y)
 
 %% Helper functions
 function polys = get_polys(waypoints, m, n, t_bounds, k_der)
@@ -168,9 +168,9 @@ function [x_traj, y_traj, z_traj, t_traj] = draw(polys_x, polys_y, polys_z, wayp
     plot3(waypoints(1,:),waypoints(2,:),waypoints(3,:),'or')
     legend('Trajectory','Waypoints','Location','best')
     grid on
-    xlabel('X')
-    ylabel('Y')
-    zlabel('Z')
+    xlabel('x [m]','Interpreter','latex')
+    ylabel('y [m]','Interpreter','latex')
+    zlabel('z [m]','Interpreter','latex')
 end
 function tvec = get_tvec(t, n, n_der)
     tvec = zeros(1,n+1-n_der);
@@ -221,4 +221,15 @@ function val = polyderval(p,t,r)
     end
     val = polyval(p,t);
 end
-
+function [] = draw_vel(Y)
+v = vecnorm(Y(4:6,:));    
+t_f = 0.01*(size(Y,2)-1);
+t = (0:0.01:t_f)';
+figure(2) 
+plot(t,v,'--k','LineWidth',1.5)
+hold on
+plot([t(1),t(end)],[1.5,1.5],'r','LineWidth',2)
+grid on
+xlabel('t [s]','Interpreter','latex')
+ylabel('$\|\dot{\mathbf{r}}(t)$ [m/s]','Interpreter','latex')
+end
