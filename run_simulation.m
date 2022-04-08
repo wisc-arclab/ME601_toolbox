@@ -1,7 +1,18 @@
+%%%%
+% Victor Freire <freiremelgiz@wisc.edu>
+% Sequoyah Walters <snwalters2@wisc.edu>
+% ARC Lab Research Group <https://xu.me.wisc.edu/>
+% University of Wisconsin-Madison
+% Updated: April 2022
+%
+%
+% ME 601 Homework 3: Simulator to test controllers.
+%
+%
 % This simulator is adapted from the U Penn MEAM 620 Robotics course:
 % https://alliance.seas.upenn.edu/~meam620/wiki/index.php
-%
-% ***************** ME 601 QUADROTOR SIMULATION *****************
+%%%%
+
 % clear workspace and add required paths
 clear; close all; clc
 addpath('utils')
@@ -145,6 +156,7 @@ for qn = 1:nquad
     h_pos{qn} = figure('Name', ['Quad ' num2str(qn) ' : position']);
     plot_state(h_pos{qn}, QP{qn}.state_hist(1:3,:), QP{qn}.time_hist, 'pos', 'vic');
     plot_state(h_pos{qn}, QP{qn}.state_des_hist(1:3,:), QP{qn}.time_hist, 'pos', 'des');
+    legend('Quad','Traj')
     % Plot velocity for each quad
     h_vel{qn} = figure('Name', ['Quad ' num2str(qn) ' : velocity']);
     plot_state(h_vel{qn}, QP{qn}.state_hist(4:6,:), QP{qn}.time_hist, 'vel', 'vic');
