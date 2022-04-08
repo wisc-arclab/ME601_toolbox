@@ -15,7 +15,8 @@ trajfile = 'traj_spiral_10s.csv';
 controlhandle = @PID_controller;
 
 %% ============ Your code ends here ============================
-
+% Plot entire trajectory initially
+plot_traj(trajfile);
 
 % real-time: if set to true, the program will slow execution to 
 % match real time.
@@ -40,7 +41,7 @@ params = crazyflie();
 
 %% **************************** FIGURES *****************************
 fprintf('Initializing figures...\n')
-h_fig = figure;
+h_fig = figure(1);
 h_3d = gca;
 axis equal
 grid on
