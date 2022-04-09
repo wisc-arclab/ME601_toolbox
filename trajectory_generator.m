@@ -1,23 +1,11 @@
+
 %%%%
-% Victor Freire <freiremelgiz@wisc.edu>
-% ARC Lab Research Group <https://xu.me.wisc.edu/>
-% University of Wisconsin-Madison
-% Updated: April 2022
-%
-%
 % ME 601 Homework 3: Trajectory Generation
+%
 % Generate minimum-snap quadcopter trajectories using
 % differential flatness. This file also produces a
 % .csv file with the correct format for the lab.
-%
-%
-% References:
-% D. Mellinger and V. Kumar, “Minimum snap trajectory generation and
-%   control for quadrotors." 
-% V. Freire and X. Xu, “Flatness-based quadcopter trajectory planning
-%   and tracking with continuous-time safety guarantees."
 %%%%
-
 clear; clc; close all
 
 %% ====== Your code goes here ======

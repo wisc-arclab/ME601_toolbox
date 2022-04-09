@@ -1,13 +1,5 @@
 %%%%
-% Victor Freire <freiremelgiz@wisc.edu>
-% Sequoyah Walters <snwalters2@wisc.edu>
-% ARC Lab Research Group <https://xu.me.wisc.edu/>
-% University of Wisconsin-Madison
-% Updated: April 2022
-%
-%
 % ME 601 Homework 3: Simulator to test controllers.
-%
 %
 % This simulator is adapted from the U Penn MEAM 620 Robotics course:
 % https://alliance.seas.upenn.edu/~meam620/wiki/index.php
@@ -28,6 +20,10 @@ controlhandle = @PID_controller;
 %% ============ Your code ends here ============================
 % Plot entire trajectory initially
 plot_traj(trajfile);
+
+% Pause before simulation
+disp("Press ENTER to begin the simulation...")
+pause
 
 % real-time: if set to true, the program will slow execution to 
 % match real time.
@@ -148,6 +144,10 @@ for qn = 1:nquad
     ttraj{qn} = ttraj{qn}(1:iter*nstep);
 end
 
+% Legend on Figure 1
+figure(1)
+legend('Trajectory','Quad','$\mathbf{r}(t)$','Interpreter','Latex')
+
 % Plot the saved position and velocity of each robot
 for qn = 1:nquad
     % Truncate saved variables
@@ -161,9 +161,8 @@ for qn = 1:nquad
     h_vel{qn} = figure('Name', ['Quad ' num2str(qn) ' : velocity']);
     plot_state(h_vel{qn}, QP{qn}.state_hist(4:6,:), QP{qn}.time_hist, 'vel', 'vic');
     plot_state(h_vel{qn}, QP{qn}.state_des_hist(4:6,:), QP{qn}.time_hist, 'vel', 'des');
+    legend('Quad','Traj')
 end
 if(~isempty(err))
     error(err);
 end
-
-fprintf('finished.\n')

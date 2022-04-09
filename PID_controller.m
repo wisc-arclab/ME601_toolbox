@@ -1,3 +1,6 @@
+%%%%
+% ME 601 Homework 3: Example PID Controller
+%%%%
 function [F, M, att] = PID_controller(x,Y,params)
 %PID_CONTROLLER This is a PID controller example.
 % [F, M, att] = PID_CONTROLLER(x,Y) returns the control inputs.
