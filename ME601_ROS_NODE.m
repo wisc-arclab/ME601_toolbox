@@ -13,7 +13,7 @@
 % Change the name of PID_controller and traj_spiral_10s.csv
 % to match the student files
 controlhandle = @PID_controller;
-trajfile = 'traj_loop_10s.csv';
+trajfile = 'traj_spiral_10s.csv';
 
 % make sure parent path is already ME601_toolbox
 addpath('utils')
@@ -64,7 +64,7 @@ function [] = state_callback(~,msg,pub_u,msg_u,controlhandle,params)
     x_temp = x;
     Y_temp = Y;
     [F, ~, att] = controlhandle(x_temp,Y_temp,params);
-    u = [F/(params.mass + 0.002); att]; % Thrust hack
+    u = [F/(params.mass); att]; % Thrust hack
     send(pub_u,populate_u(msg_u, u));
 end
 
