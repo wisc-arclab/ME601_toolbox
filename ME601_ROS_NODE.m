@@ -10,15 +10,19 @@
 
 
 %% Student Code Setup
-% Change the name of PID_controller and traj_fi8_20s.csv
+% Change the name of PID_controller and traj_spiral_10s.csv
 % to match the student files
 controlhandle = @PID_controller;
-trajfile = 'traj_fig8_20s.csv';
+trajfile = 'traj_loop_10s.csv';
+
+% make sure parent path is already ME601_toolbox
+addpath('utils')
 
 %% Copy csv file to resources folder
 [~,arc_path] = system('rospack find arclab_quadcopters'); % Assumes Ubuntu
 arc_csv_filepath = [arc_path(1:end-1),'/resources/traj/traj_me601.csv'];
-system(strcat('cp ',trajfile,' ',arc_csv_filepath)); % Copy csv file
+cp_cmd = ['cp ',trajfile,' ',arc_csv_filepath];
+system(cp_cmd); % Copy csv file
 
 %% Global parameters
 params = crazyflie();
