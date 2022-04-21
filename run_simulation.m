@@ -166,3 +166,29 @@ end
 if(~isempty(err))
     error(err);
 end
+
+% Get xi trajectory
+quat = xtraj{qn}(:,7:10)';
+xitraj = zeros(3,size(quat,2));
+for i = 1:size(quat,2)
+    [phi,theta,psi] = RotToRPY_ZXY(QuatToRot(quat(:,i)));
+    xitraj(:,i) = [phi;theta;psi];
+end
+% Plot
+figure(4)
+tiledlayout(3,1)
+nexttile(1)
+plot(ttraj{1},rad2deg(xitraj(1,:)),'r','LineWidth',2)
+xlabel('time [s]')
+ylabel('phi [deg]')
+grid on
+nexttile(2)
+plot(ttraj{1},rad2deg(xitraj(2,:)),'r','LineWidth',2)
+xlabel('time [s]')
+ylabel('theta [deg]')
+grid on
+nexttile(3)
+plot(ttraj{1},rad2deg(xitraj(3,:)),'r','LineWidth',2)
+xlabel('time [s]')
+ylabel('psi [deg]')
+grid on
